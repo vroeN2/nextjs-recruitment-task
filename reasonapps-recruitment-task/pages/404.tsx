@@ -31,7 +31,8 @@ const WrongPage = () => {
         <br />
         Looks like nothing is here
         <br /> <br /> <br />
-        <Link href={"/"}>go back to homepage</Link>
+        <Link href={"/"}>go back to homepage</Link> or{" "}
+        <Link href={"/products"}> go back to products list</Link>
       </Title>
     </ErrorWrapper>
   );
