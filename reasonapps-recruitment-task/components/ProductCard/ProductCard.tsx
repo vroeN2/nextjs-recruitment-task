@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Product } from "../../pages/products";
 import { StyledCard } from "../styled";
-import { ButtonWrapper } from "./styled";
+import { ButtonWrapper, PriceDisplayWrapper } from "./styled";
 import { Button, InputNumber, notification } from "antd";
 import { ItemInCart } from "../../store/cartSlice";
 import { useDispatch } from "react-redux";
@@ -30,19 +30,31 @@ const ProductCard = ({ id, name, image, price, description }: Product) => {
 
   return (
     <StyledCard>
-      <Link href={`product/${name}`} key={id}>
+      <Link href={`products/${name}`}>
         <div>
-          <h2>{name}</h2>
-
-          <h4>
-            <strong>Price: </strong>${price}
-          </h4>
-
           <img
             style={{ maxWidth: "250px" }}
             src={image}
             alt={`Photo of ${name}`}
           />
+
+          <h2
+            style={{
+              height: "4rem",
+              marginTop: "1rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {name}
+          </h2>
+
+          <PriceDisplayWrapper>
+            <strong style={{ fontSize: "2rem", color: "#40a9ff" }}>
+              ${price}
+            </strong>
+          </PriceDisplayWrapper>
         </div>
       </Link>
 

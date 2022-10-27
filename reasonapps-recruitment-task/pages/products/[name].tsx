@@ -48,12 +48,6 @@ export const getStaticPaths = async () => {
     params: { name: name },
   }));
 
-  console.log({
-    data: data,
-    product: products,
-    paths: paths,
-  });
-
   return {
     paths: paths,
     fallback: false,
@@ -89,11 +83,6 @@ export const getStaticProps = async ({
       return singleProduct.name === params.name;
     }
   );
-
-  console.log({
-    data: data,
-    requiredProductDetails: requiredProductDetails,
-  });
 
   return {
     props: {
