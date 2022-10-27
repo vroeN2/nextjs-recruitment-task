@@ -8,10 +8,25 @@ import {
 } from "./styled";
 import { ShoppingCart } from "react-feather";
 import styles from "../../styles/Home.module.css";
+import { Drawer } from "antd";
+import Cart from "../Cart";
+import { selectCartState } from "../../store/cartSlice";
+import { useSelector } from "react-redux";
+import DrawerFooter from "../DrawerFooter";
 
 const Navbar = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [navbarBackgroundColor, setNavbarBackgroundColor] = useState("#ffffff");
+  const cartState = useSelector(selectCartState);
+
+  const showCart = () => {
+    setIsCartOpen(true);
+  };
+
+  const closeCart = () => {
+    setIsCartOpen(false);
+  };
 
   const changeScrollY = () => {
     setScrollY(window.pageYOffset);
@@ -54,15 +69,32 @@ const Navbar = () => {
           </MenuItemWrapper>
         </Link>
 
-        <Link href="/Products">
-          <MenuItemWrapper
-            color={navbarBackgroundColor}
-            className={styles.link_card}
-          >
-            <ShoppingCart />
-          </MenuItemWrapper>
-        </Link>
+        <MenuItemWrapper
+          color={navbarBackgroundColor}
+          className={styles.link_card}
+          onClick={showCart}
+        >
+          <ShoppingCart />
+        </MenuItemWrapper>
       </LinksWrapper>
+
+      <Drawer
+        title="Shopping cart"
+        placement="right"
+        onClose={closeCart}
+        open={isCartOpen}
+        footer={<DrawerFooter itemsInCart={cartState} />}
+      >
+        {cartState.length > 0 && <Cart itemsInCart={cartState} />}
+
+        {cartState.length < 1 && (
+          <div>
+            <h2>Nothing is here</h2>
+
+            <h4>Add something to the cart first</h4>
+          </div>
+        )}
+      </Drawer>
     </NavbarWrapper>
   );
 };

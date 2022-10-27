@@ -3,9 +3,13 @@ import { AppState } from "./store";
 import { HYDRATE } from "next-redux-wrapper";
 import { Product } from "../pages/products";
 
+export interface ItemInCart {
+  qty: number;
+  product: Product;
+}
 // Type for our state
 export interface CartState {
-  itemsInCart: Product[];
+  itemsInCart: ItemInCart[];
 }
 
 // Initial state
@@ -19,12 +23,18 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     // Action to set the authentication status
-    addToCart(state, action) {
-      state.itemsInCart = [...state.itemsInCart, action.payload];
+    addToCart(state: CartState, action: { payload: ItemInCart }) {
+      const newProductInCart = {
+        qty: action.payload.qty,
+        product: action.payload.product,
+      };
+      if (newProductInCart.qty > 0)
+        state.itemsInCart = [...state.itemsInCart, newProductInCart];
     },
-    removeFromCart(state, action) {
+    removeFromCart(state: CartState, action: { payload: ItemInCart }) {
       state.itemsInCart.filter(
-        (product: Product) => product.id !== action.payload.id
+        (product: ItemInCart) =>
+          product.product.id !== action.payload.product.id
       );
     },
   },

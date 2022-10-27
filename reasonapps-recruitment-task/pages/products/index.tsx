@@ -1,10 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../../styles/Home.module.css";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import ProductCard from "../../components/ProductCard";
-import { Space, Row } from "antd";
 import { ChangeEvent, useEffect, useState } from "react";
 import {
   SearchboxWrapper,
@@ -19,14 +17,8 @@ interface Products {
 export interface Product {
   id: string;
   name: string;
-  slug: string;
   image: string;
   price: string;
-  categories: {
-    id: string;
-    slug: string;
-    name: string;
-  };
   description: string;
 }
 
@@ -91,14 +83,8 @@ export const getStaticProps = async () => {
         products {
           id
           name
-          slug
           image
           price
-          categories {
-            id
-            slug
-            name
-          }
           description
         }
       }

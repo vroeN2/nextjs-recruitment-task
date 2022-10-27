@@ -1,5 +1,4 @@
 import React from "react";
-import { Product } from "../../pages/products";
 import { MainWrapper, SingleProductWrapper } from "./styled";
 import { ArrowLeft } from "react-feather";
 
