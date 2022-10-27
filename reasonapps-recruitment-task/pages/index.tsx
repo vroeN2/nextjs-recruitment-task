@@ -3,25 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-interface Products {
-  products: Product[];
-}
-
-export interface Product {
-  id: string;
-  name: string;
-  slug: string;
-  image: string;
-  price: string;
-  categories: {
-    id: string;
-    slug: string;
-    name: string;
-  };
-  description: string;
-}
-
-const Home: NextPage<Products> = ({ products }) => {
+const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
