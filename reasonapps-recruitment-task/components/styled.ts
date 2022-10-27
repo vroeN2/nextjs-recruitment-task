@@ -11,6 +11,12 @@ export const SearchboxWrapper = styled(Row)`
   justify-content: center;
   width: 100%;
   background: #0f0f0f;
+
+  @media only screen and (max-width: 600px) {
+    top: auto;
+    bottom: 12vh;
+    left: 0;
+  }
 `;
 
 export const Searchbox = styled(Input.Search)`
