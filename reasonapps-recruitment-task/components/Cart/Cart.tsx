@@ -6,7 +6,7 @@ import {
   SingleItemInCartWrapper,
 } from "./styled";
 import { useDispatch } from "react-redux";
-import { removeFromCart, updateCart } from "../../store/cartSlice";
+import { removeFromCart } from "../../store/cartSlice";
 import { Button } from "antd";
 
 interface CartProps {
@@ -18,7 +18,6 @@ const Cart = ({ itemsInCart }: CartProps) => {
 
   const onItemRemove = (item: ItemInCart) => {
     dispatch(removeFromCart(item));
-    dispatch(updateCart);
   };
 
   return itemsInCart.map((item: ItemInCart) => {

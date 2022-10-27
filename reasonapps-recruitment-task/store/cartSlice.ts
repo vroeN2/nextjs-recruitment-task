@@ -46,11 +46,6 @@ export const cartSlice = createSlice({
         ),
       };
     },
-    updateCart(state: CartState, payload) {
-      return {
-        itemsInCart: state.itemsInCart,
-      };
-    },
   },
 
   // Special reducer for hydrating the state. Special case for next-redux-wrapper
@@ -64,7 +59,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, updateCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
 
 export const selectCartState = (state: AppState) => state.cart.itemsInCart;
 
