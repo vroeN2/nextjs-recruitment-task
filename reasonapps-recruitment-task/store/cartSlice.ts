@@ -29,9 +29,25 @@ export const cartSlice = createSlice({
         product: action.payload.product,
       };
       if (newProductInCart.qty > 0) {
-        return {
-          itemsInCart: [...state.itemsInCart, newProductInCart],
-        };
+        const productInCart = state.itemsInCart.find(
+          (item) => item.product.name === newProductInCart.product.name
+        );
+        return typeof productInCart === "undefined"
+          ? {
+              itemsInCart: [...state.itemsInCart, newProductInCart],
+            }
+          : {
+              itemsInCart: [
+                ...state.itemsInCart.filter(
+                  (product) =>
+                    product.product.id !== newProductInCart.product.id
+                ),
+                {
+                  ...productInCart,
+                  qty: productInCart.qty + newProductInCart.qty,
+                },
+              ],
+            };
       } else {
         return {
           itemsInCart: [...state.itemsInCart],
@@ -46,9 +62,6 @@ export const cartSlice = createSlice({
         ),
       };
     },
-    emptyCart() {
-      return initialState;
-    },
   },
 
   // Special reducer for hydrating the state. Special case for next-redux-wrapper
@@ -62,7 +75,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, emptyCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
 
 export const selectCartState = (state: AppState) => state.cart.itemsInCart;
 
