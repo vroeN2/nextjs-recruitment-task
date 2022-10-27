@@ -13,7 +13,7 @@ const Title = styled.h1`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #0f0f0f;
   flex-direction: column;
 
   & span {

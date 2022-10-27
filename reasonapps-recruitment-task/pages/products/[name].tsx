@@ -90,6 +90,11 @@ export const getStaticProps = async ({
     }
   );
 
+  console.log({
+    data: data,
+    requiredProductDetails: requiredProductDetails,
+  });
+
   return {
     props: {
       product: requiredProductDetails[0],
