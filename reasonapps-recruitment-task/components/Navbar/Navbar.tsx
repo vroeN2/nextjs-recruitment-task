@@ -8,10 +8,10 @@ import {
 } from "./styled";
 import { ShoppingCart } from "react-feather";
 import styles from "../../styles/Home.module.css";
-import { Drawer } from "antd";
+import { Button, Drawer, Space } from "antd";
 import Cart from "../Cart";
-import { selectCartState } from "../../store/cartSlice";
-import { useSelector } from "react-redux";
+import { selectCartState, emptyCart } from "../../store/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 import DrawerFooter from "../DrawerFooter";
 
 const Navbar = () => {
@@ -19,6 +19,7 @@ const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [navbarBackgroundColor, setNavbarBackgroundColor] = useState("#ffffff");
   const cartState = useSelector(selectCartState);
+  const dispatch = useDispatch();
 
   const showCart = () => {
     setIsCartOpen(true);
@@ -84,6 +85,18 @@ const Navbar = () => {
         onClose={closeCart}
         open={isCartOpen}
         footer={<DrawerFooter itemsInCart={cartState} />}
+        // extra={
+        //   <Space>
+        //     <Button
+        //       type="primary"
+        //       danger
+        //       size="small"
+        //       onClick={() => dispatch(emptyCart)}
+        //     >
+        //       Empty cart
+        //     </Button>
+        //   </Space>
+        // }
       >
         {cartState.length > 0 && <Cart itemsInCart={cartState} />}
 

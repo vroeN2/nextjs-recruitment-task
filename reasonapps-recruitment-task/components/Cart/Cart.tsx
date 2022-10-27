@@ -20,43 +20,47 @@ const Cart = ({ itemsInCart }: CartProps) => {
     dispatch(removeFromCart(item));
   };
 
-  return itemsInCart.map((item: ItemInCart) => {
-    return (
-      <SingleItemInCartWrapper key={item.product.id}>
-        <h3>{item.product.name}</h3>
-        <h4>
-          <strong>Price per item: </strong>${item.product.price}
-        </h4>
-        <SingleItemInCartContentWrapper>
-          <img
-            style={{ maxWidth: "150px" }}
-            src={item.product.image}
-            alt={`Photo of ${item.product.name}`}
-          />
-
-          <CartButtonWrapper>
+  return (
+    <>
+      {itemsInCart.map((item: ItemInCart) => {
+        return (
+          <SingleItemInCartWrapper key={item.product.id}>
+            <h3>{item.product.name}</h3>
             <h4>
-              <strong>Quantity:</strong> {item.qty}
+              <strong>Price per item: </strong>${item.product.price}
             </h4>
+            <SingleItemInCartContentWrapper>
+              <img
+                style={{ maxWidth: "150px" }}
+                src={item.product.image}
+                alt={`Photo of ${item.product.name}`}
+              />
 
-            <h4>
-              <strong>Subtotal:</strong> $
-              {item.qty * parseInt(item.product.price)}
-            </h4>
+              <CartButtonWrapper>
+                <h4>
+                  <strong>Quantity:</strong> {item.qty}
+                </h4>
 
-            <Button
-              type="primary"
-              danger
-              size="small"
-              onClick={() => onItemRemove(item)}
-            >
-              Remove
-            </Button>
-          </CartButtonWrapper>
-        </SingleItemInCartContentWrapper>
-      </SingleItemInCartWrapper>
-    );
-  });
+                <h4>
+                  <strong>Subtotal:</strong> $
+                  {item.qty * parseInt(item.product.price)}
+                </h4>
+
+                <Button
+                  type="primary"
+                  danger
+                  size="small"
+                  onClick={() => onItemRemove(item)}
+                >
+                  Remove
+                </Button>
+              </CartButtonWrapper>
+            </SingleItemInCartContentWrapper>
+          </SingleItemInCartWrapper>
+        );
+      })}
+    </>
+  );
 };
 
 export default Cart;
