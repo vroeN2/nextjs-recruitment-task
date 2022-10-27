@@ -49,7 +49,7 @@ const Navbar = () => {
 
   return (
     <NavbarWrapper color={navbarBackgroundColor}>
-      <LogoWrapper>MyShop.com</LogoWrapper>
+      <LogoWrapper>OurShop.com</LogoWrapper>
 
       <LinksWrapper>
         <Link href="/">

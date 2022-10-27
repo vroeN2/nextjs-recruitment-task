@@ -45,7 +45,7 @@ export const StyledCard = styled.a`
 
   & h2,
   h4 {
-    color: white;
+    color: #0f0f0f;
     transition: 0.2s all ease;
   }
 
