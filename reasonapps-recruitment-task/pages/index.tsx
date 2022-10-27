@@ -12,9 +12,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title} style={{ color: "white" }}>
-          Welcome to our shop!
-        </h1>
+        <h1 className={styles.title}>Welcome to our shop!</h1>
 
         <p className={styles.description}>
           Pick whatever you like, worry about payment later!
