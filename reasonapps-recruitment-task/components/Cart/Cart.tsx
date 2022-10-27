@@ -6,7 +6,7 @@ import {
   SingleItemInCartWrapper,
 } from "./styled";
 import { useDispatch } from "react-redux";
-import { removeFromCart } from "../../store/cartSlice";
+import { removeFromCart, updateCart } from "../../store/cartSlice";
 import { Button } from "antd";
 
 interface CartProps {
@@ -16,13 +16,18 @@ interface CartProps {
 const Cart = ({ itemsInCart }: CartProps) => {
   const dispatch = useDispatch();
 
+  const onItemRemove = (item: ItemInCart) => {
+    dispatch(removeFromCart(item));
+    dispatch(updateCart);
+  };
+
   return itemsInCart.map((item: ItemInCart) => {
     return (
       <SingleItemInCartWrapper key={item.product.id}>
-        <h4>{item.product.name}</h4>
-        <h6>
-          <strong>Price: </strong>${item.product.price}
-        </h6>
+        <h3>{item.product.name}</h3>
+        <h4>
+          <strong>Price per item: </strong>${item.product.price}
+        </h4>
         <SingleItemInCartContentWrapper>
           <img
             style={{ maxWidth: "150px" }}
@@ -36,14 +41,15 @@ const Cart = ({ itemsInCart }: CartProps) => {
             </h4>
 
             <h4>
-              <strong>Total:</strong> ${item.qty * parseInt(item.product.price)}
+              <strong>Subtotal:</strong> $
+              {item.qty * parseInt(item.product.price)}
             </h4>
 
             <Button
               type="primary"
               danger
               size="small"
-              onClick={() => dispatch(removeFromCart(item))}
+              onClick={() => onItemRemove(item)}
             >
               Remove
             </Button>

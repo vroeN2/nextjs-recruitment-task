@@ -28,14 +28,28 @@ export const cartSlice = createSlice({
         qty: action.payload.qty,
         product: action.payload.product,
       };
-      if (newProductInCart.qty > 0)
-        state.itemsInCart = [...state.itemsInCart, newProductInCart];
+      if (newProductInCart.qty > 0) {
+        return {
+          itemsInCart: [...state.itemsInCart, newProductInCart],
+        };
+      } else {
+        return {
+          itemsInCart: [...state.itemsInCart],
+        };
+      }
     },
     removeFromCart(state: CartState, action: { payload: ItemInCart }) {
-      state.itemsInCart.filter(
-        (product: ItemInCart) =>
-          product.product.id !== action.payload.product.id
-      );
+      return {
+        itemsInCart: state.itemsInCart.filter(
+          (product: ItemInCart) =>
+            product.product.id !== action.payload.product.id
+        ),
+      };
+    },
+    updateCart(state: CartState, payload) {
+      return {
+        itemsInCart: state.itemsInCart,
+      };
     },
   },
 
@@ -50,7 +64,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, updateCart } = cartSlice.actions;
 
 export const selectCartState = (state: AppState) => state.cart.itemsInCart;
 

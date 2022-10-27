@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Row, Input } from "antd";
 
 export const SearchboxWrapper = styled(Row)`
+  z-index: 3;
   position: fixed;
   top: 10vh;
   left: auto;
