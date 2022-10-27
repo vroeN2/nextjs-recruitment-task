@@ -10,7 +10,7 @@ import { ShoppingCart } from "react-feather";
 import styles from "../../styles/Home.module.css";
 import { Button, Drawer, Space } from "antd";
 import Cart from "../Cart";
-import { selectCartState, emptyCart } from "../../store/cartSlice";
+import { selectCartState } from "../../store/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import DrawerFooter from "../DrawerFooter";
 
@@ -85,18 +85,6 @@ const Navbar = () => {
         onClose={closeCart}
         open={isCartOpen}
         footer={<DrawerFooter itemsInCart={cartState} />}
-        // extra={
-        //   <Space>
-        //     <Button
-        //       type="primary"
-        //       danger
-        //       size="small"
-        //       onClick={() => dispatch(emptyCart)}
-        //     >
-        //       Empty cart
-        //     </Button>
-        //   </Space>
-        // }
       >
         {cartState.length > 0 && <Cart itemsInCart={cartState} />}
 
