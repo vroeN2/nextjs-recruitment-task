@@ -22,6 +22,7 @@ export const NavbarWrapper = styled.div`
     top: auto;
     bottom: 0;
     left: 0;
+    width: 100%;
   }
 `;
 
