@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import {
+  AddToCartButton,
+  AddToCartInput,
+  GoBackWrapper,
   MainWrapper,
+  SingleProductDescription,
   SingleProductDescriptionWrapper,
+  SingleProductName,
   SingleProductWrapper,
 } from "./styled";
 import { ArrowLeft } from "react-feather";
 import { ButtonWrapper } from "../ProductCard/styled";
-import { Button, InputNumber, notification } from "antd";
+import { notification } from "antd";
 import { useDispatch } from "react-redux";
 import { addToCart, ItemInCart } from "../../store/cartSlice";
 import { Product } from "../../pages/products";
+import { useRouter } from "next/router";
 
 const SingleProductCard = ({
   id,
@@ -19,7 +25,9 @@ const SingleProductCard = ({
   image,
 }: Product) => {
   const [itemQty, setItemQty] = useState(0);
+
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const onQtyChange = (e: number | null) => {
     setItemQty(e ?? 0);
@@ -40,6 +48,10 @@ const SingleProductCard = ({
   return (
     <MainWrapper>
       <SingleProductWrapper>
+        <GoBackWrapper>
+          <ArrowLeft onClick={() => router.back()} />
+        </GoBackWrapper>
+
         <img
           style={{ maxWidth: "550px" }}
           src={image}
@@ -47,27 +59,27 @@ const SingleProductCard = ({
         />
 
         <SingleProductDescriptionWrapper>
-          <h2 style={{ fontSize: "3rem" }}>{name}</h2>
+          <SingleProductName>{name}</SingleProductName>
           <h4 style={{ fontSize: "2rem" }}>
             <strong>Price: </strong>${price}
           </h4>
-          <p style={{ fontSize: "1.6rem", maxWidth: "70%" }}>{description}</p>
+          <SingleProductDescription>{description}</SingleProductDescription>
 
           <ButtonWrapper
             style={{ maxWidth: "50%", justifyContent: "flex-start" }}
           >
-            <InputNumber
+            <AddToCartInput
               min={0}
               max={10}
               size="large"
               value={itemQty}
               controls={true}
-              style={{ width: "40%" }}
-              onChange={(e) => onQtyChange(e)}
+              onChange={(e) =>
+                onQtyChange(typeof e === "string" ? parseInt(e) : e)
+              }
             />
 
-            <Button
-              style={{ width: "25%", marginLeft: "2rem" }}
+            <AddToCartButton
               type="primary"
               size="large"
               onClick={() =>
@@ -84,7 +96,7 @@ const SingleProductCard = ({
               }
             >
               Add to cart
-            </Button>
+            </AddToCartButton>
           </ButtonWrapper>
         </SingleProductDescriptionWrapper>
       </SingleProductWrapper>
